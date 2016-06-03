@@ -2,6 +2,8 @@ namespace SpecIt
 {
     using System;
 
+    using SpecIt.Assertion;
+
     public class ThenSteps : IThen
     {
         private readonly ThenOperator thenOperator;

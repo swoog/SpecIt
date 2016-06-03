@@ -1,4 +1,4 @@
-﻿namespace SpecIt
+namespace SpecIt.Assertion
 {
     using System;
 

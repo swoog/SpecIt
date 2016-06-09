@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9125
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CoffeeMachine", "samples\CoffeeMachine\CoffeeMachine.xproj", "{855AC451-0708-4EBE-BF94-4171D235CEDD}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SpecIt.Assert", "src\SpecIt.Assert\SpecIt.Assert.xproj", "{87CA1D92-5060-482A-BB8E-CB2A2A75C777}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{855AC451-0708-4EBE-BF94-4171D235CEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855AC451-0708-4EBE-BF94-4171D235CEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{855AC451-0708-4EBE-BF94-4171D235CEDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87CA1D92-5060-482A-BB8E-CB2A2A75C777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87CA1D92-5060-482A-BB8E-CB2A2A75C777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87CA1D92-5060-482A-BB8E-CB2A2A75C777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87CA1D92-5060-482A-BB8E-CB2A2A75C777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 		{DD85646B-EA83-4D32-A2DB-ACA17AFA739C} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
 		{FDCB873C-A98A-455E-8CF2-7938B2392F03} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
 		{855AC451-0708-4EBE-BF94-4171D235CEDD} = {91254D22-346A-4274-B864-9197141DF6DB}
+		{87CA1D92-5060-482A-BB8E-CB2A2A75C777} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
 	EndGlobalSection
 EndGlobal

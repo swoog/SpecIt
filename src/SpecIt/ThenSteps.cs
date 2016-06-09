@@ -15,10 +15,5 @@ namespace SpecIt
             this.thenOperator = new ThenOperator(this);
             this.resolver = resolver;
         }
-
-        public IAssert<TResult> Assert<T, TResult>(Func<T, TResult> func)
-        {
-            return new Assert<TResult>(func(this.resolver.Resolve<T>()), this.thenOperator);
-        }
     }
 }

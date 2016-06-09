@@ -4,9 +4,11 @@
 
     public class Scenario
     {
+        public static IResolver Resolver { get; set; } = new Resolver();
+
         protected IGiven Given()
         {
-            return new GivenSteps(new Resolver());
+            return Resolver.Resolve<GivenSteps>();
         }
     }
 }

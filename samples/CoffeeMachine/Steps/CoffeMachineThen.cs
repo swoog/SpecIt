@@ -1,6 +1,7 @@
 ﻿namespace CoffeeMachine.Steps
 {
     using SpecIt;
+    using SpecIt.Assert;
 
     public static class CoffeMachineThen
     {

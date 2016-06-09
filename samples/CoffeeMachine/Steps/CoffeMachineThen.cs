@@ -23,7 +23,10 @@
         {
             return then.Assert<CoffeeMachine, bool>(c => true).IsEqualTo(b);
         }
-
+        public static IThenOperator I_shouldOrNot_be_served_a_coffee(this IThen then, bool b)
+        {
+            return then.Assert<CoffeeMachine, bool>(c => true).IsEqualTo(b);
+        }
         public static IThenOperator a_coffee_should_be_served(this IThen then)
         {
             return then.I_should_be_served_a_coffee(true);

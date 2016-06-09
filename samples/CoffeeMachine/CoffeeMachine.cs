@@ -14,6 +14,8 @@ namespace CoffeeMachine
 
         public bool On { get; set; }
 
+        public int Cost { get; set; }
+
         public void InsertOneEuroCoin(int euros)
         {
             this.coins.Add(new Coin(euros));

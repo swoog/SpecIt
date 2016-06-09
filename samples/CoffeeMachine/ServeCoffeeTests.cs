@@ -105,27 +105,24 @@ namespace CoffeeMachine
                 .Then().no_coffee_should_be_served();
         }
 
-        //    @TagsWithCustomStyle
-        //    @Test
-        //@DataProvider( {
-        //        "true, 1, 1, false",
-        //    "true, 1, 2, true",
-        //    "true, 0, 2, false",
-        //    "false, 1, 2, false",
-        //} )
-        //public void buy_a_coffee(boolean onOrOff, int coffees, int dollars, boolean shouldOrShouldNot)
-        //    {
+        [Theory]
+        [InlineData(true, 1, 1, false)]
+        [InlineData(true, 1, 2, true)]
+        [InlineData(true, 0, 2, false)]
+        [InlineData(false, 1, 2, false)]
+        public void buy_a_coffee(bool onOrOff, int coffees, int dollars, bool shouldOrShouldNot)
+        {
+            this.
+                Given().a_coffee_machine().
+                And().there_are_numberCoffee_coffees_left_in_the_machine(coffees).
+                And().the_machine_is_onOrOff(onOrOff).
+                And().the_coffee_costs_money_dollar(2)
 
-        //        given().a_coffee_machine().
-        //            and().there_are_$_coffees_left_in_the_machine(coffees).
-        //            and().the_machine_is_$onOrOff(onOrOff).
-        //            and().the_coffee_costs_$_dollar(2);
+                .When().I_insert_euros_one_euro_coins(dollars)
+                .And().I_press_the_coffee_button()
 
-        //        when().I_insert_$_one_euro_coins(dollars).
-        //            and().I_press_the_coffee_button();
-
-        //        then().I_$shouldOrShouldNot_be_served_a_coffee(shouldOrShouldNot);
-        //    }
+                .Then().I_shouldOrNot_be_served_a_coffee(shouldOrShouldNot);
+        }
 
         //    @Test
         //    @FeatureCaseDiffs

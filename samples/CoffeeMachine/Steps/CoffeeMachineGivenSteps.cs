@@ -28,5 +28,17 @@ namespace CoffeeMachine.Steps
             this.coffeeMachine.On = false;
             return this.Next();
         }
+
+        public IGivenOperator<CoffeeMachineGivenSteps> the_machine_is_onOrOff(bool onOrOff)
+        {
+            this.coffeeMachine.On = onOrOff;
+            return this.Next();
+        }
+
+        public IGivenOperator<CoffeeMachineGivenSteps> the_coffee_costs_money_dollar(int money)
+        {
+            this.coffeeMachine.Cost = money;
+            return this.Next();
+        }
     }
 }

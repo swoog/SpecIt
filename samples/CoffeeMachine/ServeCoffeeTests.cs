@@ -124,29 +124,29 @@ namespace CoffeeMachine
                 .Then().I_shouldOrNot_be_served_a_coffee(shouldOrShouldNot);
         }
 
-        //    @Test
-        //    @FeatureCaseDiffs
-        //@DataProvider( { "true", "false" } )
-        //public void turned_off_machines_should_not_serve_coffee(boolean onOrOff)
-        //    {
-        //        given().a_coffee_machine()
-        //            .and().there_are_$_coffees_left_in_the_machine(2)
-        //            .and().the_machine_is_$onOrOff(onOrOff);
+[Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void turned_off_machines_should_not_serve_coffee(bool onOrOff)
+        {
+            var when = this.Given().a_coffee_machine()
+                .And().there_are_numberCoffee_coffees_left_in_the_machine(2)
+                .And().the_machine_is_onOrOff(onOrOff)
 
-        //        when().I_insert_$_one_euro_coins(2).
-        //            and().I_press_the_coffee_button();
+            .When().I_insert_euros_one_euro_coins(2)
+            .And().I_press_the_coffee_button();
 
-        //        if (onOrOff)
-        //        {
-        //            then().I_should_be_served_a_coffee();
-        //        }
-        //        else
-        //        {
-        //            then().I_should_not_be_served_a_coffee().
-        //                and().no_error_is_shown();
-        //        }
+            if (onOrOff)
+            {
+                when.Then().I_should_be_served_a_coffee();
+            }
+            else
+            {
+                when.Then().I_should_not_be_served_a_coffee().
+                    And().no_error_is_shown();
+            }
 
-        //    }
+        }
 
         //    @Test
         //public void a_failing_scenario_for_demonstration_purposes()

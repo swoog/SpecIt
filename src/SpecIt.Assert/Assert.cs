@@ -102,6 +102,20 @@ namespace SpecIt.Assert
                     });
         }
 
+        public IThenOperator NotStartsWith(string message)
+        {
+            return this.Is(
+                v =>
+                {
+                    if (!(v is string))
+                    {
+                        return true;
+                    }
+
+                    return !(v as string).StartsWith(message);
+                });
+        }
+
         public IThenOperator IsNotEqualTo(T expected)
         {
             string typeName = Humanize();

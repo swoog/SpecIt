@@ -11,5 +11,7 @@ namespace SpecIt.Assert
         IThenOperator StartsWith(string message);
 
         IThenOperator IsNotEqualTo(T expected);
+
+        IThenOperator NotStartsWith(string message);
     }
 }

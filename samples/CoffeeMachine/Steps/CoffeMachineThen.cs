@@ -15,15 +15,25 @@
             return then.Assert<CoffeeMachine, string>(c => c.Message).StartsWith("Error");
         }
 
+        public static IThenOperator no_error_is_shown(this IThen then)
+        {
+            return then.Assert<CoffeeMachine, string>(c => c.Message).NotStartsWith("Error");
+        }
+
         public static IThenOperator no_coffee_should_be_served(this IThen then)
         {
             return then.Assert<CoffeeMachine, int>(c => c.Coffees).Is(v => true);
         }
 
-        public static IThenOperator I_should_be_served_a_coffee(this IThen then, bool b)
+        public static IThenOperator I_should_be_served_a_coffee(this IThen then)
         {
-            return then.Assert<CoffeeMachine, bool>(c => true).IsEqualTo(b);
+            return then.I_shouldOrNot_be_served_a_coffee(true);
         }
+        public static IThenOperator I_should_not_be_served_a_coffee(this IThen then)
+        {
+            return then.I_shouldOrNot_be_served_a_coffee(false);
+        }
+
         public static IThenOperator I_shouldOrNot_be_served_a_coffee(this IThen then, bool b)
         {
             if (!b)
@@ -35,7 +45,7 @@
         }
         public static IThenOperator a_coffee_should_be_served(this IThen then)
         {
-            return then.I_should_be_served_a_coffee(true);
+            return then.I_should_be_served_a_coffee();
         }
 
         public static IThenOperator there_are_numberOfCoffee_coffees_left_in_the_machine(this IThen then, int numberOfCoffee)

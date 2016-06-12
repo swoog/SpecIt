@@ -9,10 +9,11 @@ namespace SpecIt
 
         private readonly IResolver resolver;
 
-        public GivenOperator(T given, IResolver resolver)
+        public GivenOperator(T given, IResolver resolver, Scenario scenario)
         {
             this.given = given;
             this.resolver = resolver;
+            this.Scenario = scenario;
         }
 
         public T And()
@@ -22,12 +23,14 @@ namespace SpecIt
 
         public IWhen When()
         {
-            return new WhenSteps(this.resolver);
+            return new WhenSteps(this.resolver, this.Scenario);
         }
+
+        public Scenario Scenario { get; }
 
         public IThen Then()
         {
-            return new ThenSteps(this.resolver);
+            return new ThenSteps(this.Scenario);
         }
     }
 }

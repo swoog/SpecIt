@@ -14,6 +14,8 @@ namespace CoffeeMachine
 
         public bool On { get; set; }
 
+        public int Cost { get; set; }
+
         public void InsertOneEuroCoin(int euros)
         {
             this.coins.Add(new Coin(euros));
@@ -21,6 +23,11 @@ namespace CoffeeMachine
 
         public int PressButton()
         {
+            if (!this.On)
+            {
+                return 0;
+            }
+
             if (this.Coffees == 0)
             {
                 this.Message = "Error: No coffees left";
@@ -36,7 +43,7 @@ namespace CoffeeMachine
 
             this.Message = "Enjoy your coffee!";
             this.Coffees--;
-            return 0;
+            return 1;
         }
     }
 

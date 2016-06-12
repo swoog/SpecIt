@@ -4,12 +4,10 @@ namespace SpecIt
     {
         private readonly WhenSteps whenSteps;
 
-        private readonly IResolver resolver;
-
-        public WhenOperator(WhenSteps whenSteps, IResolver resolver)
+        public WhenOperator(WhenSteps whenSteps, Scenario scenario)
         {
             this.whenSteps = whenSteps;
-            this.resolver = resolver;
+            this.Scenario = scenario;
         }
 
         public IWhen And()
@@ -19,7 +17,9 @@ namespace SpecIt
 
         public IThen Then()
         {
-            return new ThenSteps(this.resolver);
+            return new ThenSteps(this.Scenario);
         }
+
+        public Scenario Scenario { get; }
     }
 }

@@ -1,5 +1,7 @@
 namespace SpecIt
 {
+    using System;
+
     public class GivenSteps<T> : GivenSteps
         where T : IGiven
     {
@@ -10,7 +12,7 @@ namespace SpecIt
 
         public IGivenOperator<T> Next()
         {
-            return new GivenOperator<T>(this.resolver.Resolve<T>(), this.resolver);
+            return this.resolver.Resolve<GivenOperator<T>>();
         }
     }
 
@@ -26,7 +28,18 @@ namespace SpecIt
         public IGivenOperator<T> Next<T>()
             where T : IGiven
         {
-            return new GivenOperator<T>(this.resolver.Resolve<T>(), this.resolver);
+            return this.resolver.Resolve<GivenOperator<T>>();
+        }
+
+        public IGivenOperator<IGiven> Next()
+        {
+            return this.resolver.Resolve<GivenOperator<IGiven>>(new { Given = this });
+        }
+
+        public IGiven Set<T>(Action<T> func)
+        {
+            func(this.resolver.Resolve<T>());
+            return this;
         }
     }
 }

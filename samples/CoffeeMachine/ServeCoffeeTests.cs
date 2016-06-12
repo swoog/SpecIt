@@ -105,108 +105,48 @@ namespace CoffeeMachine
                 .Then().no_coffee_should_be_served();
         }
 
-        //    @TagsWithCustomStyle
-        //    @Test
-        //@DataProvider( {
-        //        "true, 1, 1, false",
-        //    "true, 1, 2, true",
-        //    "true, 0, 2, false",
-        //    "false, 1, 2, false",
-        //} )
-        //public void buy_a_coffee(boolean onOrOff, int coffees, int dollars, boolean shouldOrShouldNot)
-        //    {
+        [Theory]
+        [InlineData(true, 1, 1, false)]
+        [InlineData(true, 1, 2, true)]
+        [InlineData(true, 0, 2, false)]
+        [InlineData(false, 1, 2, false)]
+        public void buy_a_coffee(bool onOrOff, int coffees, int dollars, bool shouldOrShouldNot)
+        {
+            this.
+                Given().a_coffee_machine().
+                And().there_are_numberCoffee_coffees_left_in_the_machine(coffees).
+                And().the_machine_is_onOrOff(onOrOff).
+                And().the_coffee_costs_money_dollar(2)
 
-        //        given().a_coffee_machine().
-        //            and().there_are_$_coffees_left_in_the_machine(coffees).
-        //            and().the_machine_is_$onOrOff(onOrOff).
-        //            and().the_coffee_costs_$_dollar(2);
+                .When().I_insert_euros_one_euro_coins(dollars)
+                .And().I_press_the_coffee_button()
 
-        //        when().I_insert_$_one_euro_coins(dollars).
-        //            and().I_press_the_coffee_button();
+                .Then().I_shouldOrNot_be_served_a_coffee(shouldOrShouldNot);
+        }
 
-        //        then().I_$shouldOrShouldNot_be_served_a_coffee(shouldOrShouldNot);
-        //    }
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void turned_off_machines_should_not_serve_coffee(bool onOrOff)
+        {
+            var when =
+                this
+                .Given().a_coffee_machine()
+                .And().there_are_numberCoffee_coffees_left_in_the_machine(2)
+                .And().the_machine_is_onOrOff(onOrOff)
 
-        //    @Test
-        //    @FeatureCaseDiffs
-        //@DataProvider( { "true", "false" } )
-        //public void turned_off_machines_should_not_serve_coffee(boolean onOrOff)
-        //    {
-        //        given().a_coffee_machine()
-        //            .and().there_are_$_coffees_left_in_the_machine(2)
-        //            .and().the_machine_is_$onOrOff(onOrOff);
+                .When().I_insert_euros_one_euro_coins(2)
+                .And().I_press_the_coffee_button();
 
-        //        when().I_insert_$_one_euro_coins(2).
-        //            and().I_press_the_coffee_button();
-
-        //        if (onOrOff)
-        //        {
-        //            then().I_should_be_served_a_coffee();
-        //        }
-        //        else
-        //        {
-        //            then().I_should_not_be_served_a_coffee().
-        //                and().no_error_is_shown();
-        //        }
-
-        //    }
-
-        //    @Test
-        //public void a_failing_scenario_for_demonstration_purposes()
-        //    {
-        //        given().a_coffee_machine()
-        //            .and().there_are_no_more_coffees_left();
-        //        when().I_press_the_coffee_button();
-        //        then().I_should_be_served_a_coffee()
-        //            .and().steps_following_a_failed_step_should_be_skipped();
-        //    }
-
-        //    @Test
-        //    @DataProvider( {
-        //        "true",
-        //    "false"
-        //    } )
-        //public void a_scenario_with_a_failing_test_case_for_demonstration_purposes(boolean withCoffees)
-        //    {
-        //        given().a_coffee_machine();
-
-        //        if (withCoffees)
-        //        {
-        //            given().and().there_are_$_coffees_left_in_the_machine(2);
-        //        }
-
-        //        when().I_insert_$_one_euro_coins(2).
-        //            and().I_press_the_coffee_button();
-
-        //        then().I_should_be_served_a_coffee();
-        //    }
-
-        //    @Test
-        //public void intro_words_are_not_required()
-        //    {
-        //        given().a_coffee_machine()
-        //            .the_coffee_costs_$_dollar(5)
-        //            .there_are_$_coffees_left_in_the_machine(3);
-
-        //        when().I_press_the_coffee_button();
-
-        //        then().an_error_should_be_shown()
-        //            .no_coffee_should_be_served();
-        //    }
-
-        //@Test(timeout = 1000)
-        //public void shouldFailWithUnexpectedRuntimeException() throws Exception
-        //    {
-        //        then().$( "should throw a runtime exception", //$NON-NLS-1$
-        //        new StepFunction<ThenCoffee>() {
-        //            @Override
-        //            public void apply(final ThenCoffee stage )
-        //                    throws Exception
-        //    {
-        //        Thread.sleep( 2000 );
-        //    }
-        //} );
-        //}
-
+            if (onOrOff)
+            {
+                when.Then().I_should_be_served_a_coffee();
+            }
+            else
+            {
+                when.Then().I_should_not_be_served_a_coffee().
+                    And().no_error_is_shown();
+            }
+        }
     }
 }

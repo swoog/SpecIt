@@ -10,7 +10,7 @@ namespace SpecIt
 
         public IGivenOperator<T> Next()
         {
-            return new GivenOperator<T>(this.resolver.Resolve<T>(), this.resolver);
+            return this.resolver.Resolve<GivenOperator<T>>();
         }
     }
 
@@ -26,7 +26,7 @@ namespace SpecIt
         public IGivenOperator<T> Next<T>()
             where T : IGiven
         {
-            return new GivenOperator<T>(this.resolver.Resolve<T>(), this.resolver);
+            return this.resolver.Resolve<GivenOperator<T>>();
         }
     }
 }

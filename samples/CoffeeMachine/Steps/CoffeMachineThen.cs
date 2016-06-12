@@ -1,6 +1,7 @@
 ﻿namespace CoffeeMachine.Steps
 {
     using SpecIt;
+    using SpecIt.Assert;
 
     public static class CoffeMachineThen
     {
@@ -25,7 +26,12 @@
         }
         public static IThenOperator I_shouldOrNot_be_served_a_coffee(this IThen then, bool b)
         {
-            return then.Assert<CoffeeMachine, bool>(c => true).IsEqualTo(b);
+            if (!b)
+            {
+                return then.Assert<int>().IsEqualTo(0);
+            }
+
+            return then.Assert<int>().IsNotEqualTo(0);
         }
         public static IThenOperator a_coffee_should_be_served(this IThen then)
         {

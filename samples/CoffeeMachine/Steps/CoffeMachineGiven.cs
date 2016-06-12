@@ -6,7 +6,8 @@ namespace CoffeeMachine.Steps
     {
         public static IGivenOperator<CoffeeMachineGivenSteps> a_coffee_machine(this IGiven given)
         {
-            return given.Next<CoffeeMachineGivenSteps>();
+            return given.Next<CoffeeMachineGivenSteps>()
+                .And().the_machine_is_onOrOff(true);
         }
 
 

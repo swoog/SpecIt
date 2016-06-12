@@ -6,21 +6,24 @@ namespace SpecIt
     {
         private readonly IResolver resolver;
 
-        public WhenSteps(IResolver resolver)
+        public WhenSteps(IResolver resolver, Scenario scenario)
         {
             this.resolver = resolver;
+            this.Scenario = scenario;
         }
 
         public IWhenOperator Action<T>(Action<T> action)
         {
             action(this.resolver.Resolve<T>());
-            return new WhenOperator(this, this.resolver);
+            return new WhenOperator(this, this.Scenario);
         }
+
+        public Scenario Scenario { get; }
 
         public IWhenOperator Func<T, TResult>(Func<T, TResult> action)
         {
-            action(this.resolver.Resolve<T>());
-            return new WhenOperator(this, this.resolver);
+            this.Scenario.ReturnValue = action(this.resolver.Resolve<T>());
+            return new WhenOperator(this, this.Scenario);
         }
     }
 }

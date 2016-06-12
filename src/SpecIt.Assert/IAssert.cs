@@ -1,4 +1,4 @@
-namespace SpecIt.Assertion
+namespace SpecIt.Assert
 {
     using System;
 
@@ -9,5 +9,7 @@ namespace SpecIt.Assertion
         IThenOperator IsEqualTo(T expected);
 
         IThenOperator StartsWith(string message);
+
+        IThenOperator IsNotEqualTo(T expected);
     }
 }

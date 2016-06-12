@@ -2,18 +2,18 @@ namespace SpecIt
 {
     using System;
 
-    using SpecIt.Assertion;
-
     public class ThenSteps : IThen
     {
-        private readonly ThenOperator thenOperator;
-
-        private readonly IResolver resolver;
-
-        public ThenSteps(IResolver resolver)
+        public ThenSteps(Scenario scenario)
         {
-            this.thenOperator = new ThenOperator(this);
-            this.resolver = resolver;
+            this.Scenario = scenario;
+        }
+
+        public Scenario Scenario { get; }
+
+        public T GetReturnValue<T>()
+        {
+            return (T)this.Scenario.ReturnValue;
         }
     }
 }

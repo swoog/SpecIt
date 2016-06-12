@@ -24,6 +24,11 @@ namespace SpecIt
             return (T)this.Resolve(typeof(T), constructorArguments);
         }
 
+        public void BindTo<T>(T obj)
+        {
+            this.instances.Add(typeof(T), obj);
+        }
+
         private object Resolve(Type type, object constructorArguments)
         {
             var isCached = constructorArguments == null;

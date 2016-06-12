@@ -2,5 +2,8 @@
 {
     public interface IThen
     {
+        Scenario Scenario { get; }
+
+        T GetReturnValue<T>();
     }
 }

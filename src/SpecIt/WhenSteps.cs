@@ -25,5 +25,15 @@ namespace SpecIt
             this.Scenario.ReturnValue = action(this.resolver.Resolve<T>());
             return new WhenOperator(this, this.Scenario);
         }
+
+        public TResult Get<T, TResult>(Func<T, TResult> func)
+        {
+            return func(this.resolver.Resolve<T>());
+        }
+
+        public T GetReturnValue<T>()
+        {
+            return (T)this.Scenario.ReturnValue;
+        }
     }
 }

@@ -86,7 +86,7 @@ namespace SpecIt
 
             foreach (var propertyInfo in constructorArguments.GetType().GetProperties())
             {
-                if (propertyInfo.PropertyType == parameterInfo.ParameterType && CompareNames(parameterInfo, propertyInfo))
+                if (CompareNames(parameterInfo, propertyInfo))
                 {
                     value = propertyInfo.GetValue(constructorArguments);
                     return true;

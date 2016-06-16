@@ -15,17 +15,18 @@ namespace SpecIt.Tests
 
     public class AssertTests
     {
-        private IThen then;
+        private readonly IThen then;
 
-        private MyObject myObject;
+        private readonly MyObject myObject;
 
         public AssertTests()
         {
             var scenario = new Scenario();
-            this.myObject = scenario.Resolver.Resolve<MyObject>();
+            this.myObject = new MyObject("Fake value to simulate a constructor argument");
 
             this.then = Substitute.For<IThen>();
             this.then.Scenario.Returns(scenario);
+            this.then.GetReturnValue<MyObject>().Returns(this.myObject);
         }
 
         [Fact]
@@ -63,6 +64,11 @@ namespace SpecIt.Tests
 
     public class MyObject
     {
+        public MyObject(string c)
+        {
+
+        }
+
         public string Name { get; set; }
 
         public int ItemsOrder { get; set; }

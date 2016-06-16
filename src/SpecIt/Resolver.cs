@@ -78,11 +78,9 @@ namespace SpecIt
                             throw new ResolverException(
                                 resolverException.Message + " when resolver injection to :\n" + type.Name, false);
                         }
-                        else
-                        {
-                            throw new ResolverException(
-                                resolverException.Message + "\n" + type.Name, false);
-                        }
+
+                        throw new ResolverException(
+                            resolverException.Message + "\n" + type.Name, false);
                     }
                 }
             }

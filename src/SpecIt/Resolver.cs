@@ -41,6 +41,11 @@ namespace SpecIt
             {
                 var concreteType = FindConcreteType(type);
 
+                if (concreteType == null)
+                {
+                    throw new ResolverException($"{type.Name} has no binding");
+                }
+
                 return this.Resolve(concreteType, null);
             }
 
@@ -73,7 +78,7 @@ namespace SpecIt
 
         private Type FindConcreteType(Type interfacType)
         {
-            return interfacType.Assembly.GetTypes().Single(t => t.GetInterfaces().Any(i => i == interfacType));
+            return interfacType.Assembly.GetTypes().FirstOrDefault(t => t.GetInterfaces().Any(i => i == interfacType));
         }
 
         private bool FindParameter(object constructorArguments, ParameterInfo parameterInfo, out object value)

@@ -43,13 +43,18 @@ namespace SpecIt
 
                 if (concreteType == null)
                 {
-                    throw new ResolverException($"{type.Name} has no binding");
+                    throw new ResolverException($"{type.Name} has no binding", true);
                 }
 
                 return this.Resolve(concreteType, null);
             }
 
-            var constructor = type.GetConstructors().First();
+            var constructor = type.GetConstructors().FirstOrDefault();
+
+            if (constructor == null)
+            {
+                throw new ResolverException($"{type.Name} has no constructor", true);
+            }
 
             var parameters = new List<object>();
 
@@ -62,7 +67,23 @@ namespace SpecIt
                 }
                 else
                 {
-                    parameters.Add(this.Resolve(parameterInfo.ParameterType, null));
+                    try
+                    {
+                        parameters.Add(this.Resolve(parameterInfo.ParameterType, null));
+                    }
+                    catch (ResolverException resolverException)
+                    {
+                        if (resolverException.IsFirst)
+                        {
+                            throw new ResolverException(
+                                resolverException.Message + " when resolver injection to :\n" + type.Name, false);
+                        }
+                        else
+                        {
+                            throw new ResolverException(
+                                resolverException.Message + "\n" + type.Name, false);
+                        }
+                    }
                 }
             }
 

@@ -20,5 +20,45 @@ namespace SpecIt.Tests
 
             Check.That(scenario1.Resolver).IsNotEqualTo(scenario2.Resolver);
         }
+
+        [Fact]
+        public void Should_display_error_message_When_resolver_does_not_contains_binding()
+        {
+            var resolver = new Resolver();
+
+            Check.ThatCode(() => resolver.Resolve<IFakeInterface>())
+                .Throws<ResolverException>()
+                .WithMessage("IFakeInterface has no binding");
+        }
+
+        [Fact]
+        public void Should_display_error_message_When_resolve_type_with_no_constructor()
+        {
+            var resolver = new Resolver();
+
+            Check.ThatCode(() => resolver.Resolve<char>())
+                .Throws<ResolverException>()
+                .WithMessage("Char has no constructor");
+        }
+
+        [Fact]
+        public void Should_display_stack_message_When_resolve_type_with_no_constructor()
+        {
+            var resolver = new Resolver();
+
+            Check.ThatCode(() => resolver.Resolve<FakeObjectWithCharConstructor>())
+                .Throws<ResolverException>()
+                .WithMessage("Char has no constructor when resolver injection to :\nFakeObjectWithCharConstructor");
+        }
+
+        [Fact]
+        public void Should_display_stack_message_When_resolve_type_with_no_constructor_and_parent()
+        {
+            var resolver = new Resolver();
+
+            Check.ThatCode(() => resolver.Resolve<FakeParentObjectWithCharConstructor>())
+                .Throws<ResolverException>()
+                .WithMessage("Char has no constructor when resolver injection to :\nFakeObjectWithCharConstructor\nFakeParentObjectWithCharConstructor");
+        }
     }
 }

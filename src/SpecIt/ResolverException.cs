@@ -4,10 +4,12 @@ namespace SpecIt
 
     public class ResolverException : Exception
     {
-        public ResolverException(string message)
+        public ResolverException(string message, bool isFirst)
             : base(message)
         {
-
+            this.IsFirst = isFirst;
         }
+
+        public bool IsFirst { get; }
     }
 }

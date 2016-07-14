@@ -1,7 +1,5 @@
 ﻿namespace SpecIt
 {
-    using System.Security.Cryptography.X509Certificates;
-
     public class Scenario
     {
         public Scenario()

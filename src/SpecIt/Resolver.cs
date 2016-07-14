@@ -37,7 +37,7 @@ namespace SpecIt
                 return this.instances[type];
             }
 
-            if (type.IsInterface)
+            if (type.GetTypeInfo().IsInterface)
             {
                 var concreteType = FindConcreteType(type);
 
@@ -49,7 +49,7 @@ namespace SpecIt
                 return this.Resolve(concreteType, null);
             }
 
-            var constructor = type.GetConstructors().FirstOrDefault();
+            var constructor = type.GetTypeInfo().GetConstructors().FirstOrDefault();
 
             if (constructor == null)
             {
@@ -97,7 +97,7 @@ namespace SpecIt
 
         private Type FindConcreteType(Type interfacType)
         {
-            return interfacType.Assembly.GetTypes().FirstOrDefault(t => t.GetInterfaces().Any(i => i == interfacType));
+            return interfacType.GetTypeInfo().Assembly.GetTypes().FirstOrDefault(t => t.GetTypeInfo().GetInterfaces().Any(i => i == interfacType));
         }
 
         private bool FindParameter(object constructorArguments, ParameterInfo parameterInfo, out object value)
@@ -108,7 +108,7 @@ namespace SpecIt
                 return false;
             }
 
-            foreach (var propertyInfo in constructorArguments.GetType().GetProperties())
+            foreach (var propertyInfo in constructorArguments.GetType().GetTypeInfo().GetProperties())
             {
                 if (CompareNames(parameterInfo, propertyInfo))
                 {
@@ -123,7 +123,7 @@ namespace SpecIt
 
         private static bool CompareNames(ParameterInfo parameterInfo, PropertyInfo propertyInfo)
         {
-            return string.Compare(propertyInfo.Name, parameterInfo.Name, StringComparison.InvariantCultureIgnoreCase) == 0;
+            return string.Compare(propertyInfo.Name, parameterInfo.Name, StringComparison.OrdinalIgnoreCase) == 0;
         }
     }
 }

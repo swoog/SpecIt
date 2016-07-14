@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assemblies>
+  <assembly name="C:\Repos\SpecIt\src\SpecIt.Tests\bin\Debug\net461\win7-x64\SpecIt.Tests.DLL" environment="64-bit .NET 4.0.30319.42000 [collection-per-class, parallel (4 threads)]" test-framework="xUnit.net 2.1.0.3179" run-date="2016-07-14" run-time="19:32:23" config-file="C:\Repos\SpecIt\src\SpecIt.Tests\bin\Debug\net461\win7-x64\dotnet-test-xunit.exe.Config" total="8" passed="8" failed="0" skipped="0" time="0.394" errors="0">
+    <errors />
+    <collection total="5" passed="5" failed="0" skipped="0" name="Test collection for SpecIt.Tests.ResolverTests" time="0.048">
+      <test name="SpecIt.Tests.ResolverTests.Should_display_stack_message_When_resolve_type_with_no_constructor_and_parent" type="SpecIt.Tests.ResolverTests" method="Should_display_stack_message_When_resolve_type_with_no_constructor_and_parent" time="0.0320477" result="Pass" />
+      <test name="SpecIt.Tests.ResolverTests.Should_display_error_message_When_resolver_does_not_contains_binding" type="SpecIt.Tests.ResolverTests" method="Should_display_error_message_When_resolver_does_not_contains_binding" time="0.0044638" result="Pass" />
+      <test name="SpecIt.Tests.ResolverTests.Should_display_stack_message_When_resolve_type_with_no_constructor" type="SpecIt.Tests.ResolverTests" method="Should_display_stack_message_When_resolve_type_with_no_constructor" time="0.0015118" result="Pass" />
+      <test name="SpecIt.Tests.ResolverTests.Should_resolver_is_not_the_same_When_instanciate_new_scenario" type="SpecIt.Tests.ResolverTests" method="Should_resolver_is_not_the_same_When_instanciate_new_scenario" time="0.0073878" result="Pass" />
+      <test name="SpecIt.Tests.ResolverTests.Should_display_error_message_When_resolve_type_with_no_constructor" type="SpecIt.Tests.ResolverTests" method="Should_display_error_message_When_resolve_type_with_no_constructor" time="0.0026051" result="Pass" />
+    </collection>
+    <collection total="3" passed="3" failed="0" skipped="0" name="Test collection for SpecIt.Tests.AssertTests" time="0.265">
+      <test name="SpecIt.Tests.AssertTests.Should_throw_exception_When_int_are_note_equal" type="SpecIt.Tests.AssertTests" method="Should_throw_exception_When_int_are_note_equal" time="0.2533195" result="Pass" />
+      <test name="SpecIt.Tests.AssertTests.Should_throw_exception_When_no_property_name" type="SpecIt.Tests.AssertTests" method="Should_throw_exception_When_no_property_name" time="0.003512" result="Pass" />
+      <test name="SpecIt.Tests.AssertTests.Should_throw_exception_When_string_are_note_equal" type="SpecIt.Tests.AssertTests" method="Should_throw_exception_When_string_are_note_equal" time="0.0079796" result="Pass" />
+    </collection>
+  </assembly>
+</assemblies>

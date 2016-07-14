@@ -15,5 +15,10 @@ namespace SpecIt
         {
             return (T)this.Scenario.ReturnValue;
         }
+
+        public bool ReturnValueIs<T>()
+        {
+            return this.Scenario.ReturnValue is T;
+        }
     }
 }

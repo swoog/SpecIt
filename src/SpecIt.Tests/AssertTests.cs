@@ -23,10 +23,9 @@ namespace SpecIt.Tests
         {
             var scenario = new Scenario();
             this.myObject = new MyObject("Fake value to simulate a constructor argument");
+            scenario.ReturnValue = this.myObject;
 
-            this.then = Substitute.For<IThen>();
-            this.then.Scenario.Returns(scenario);
-            this.then.GetReturnValue<MyObject>().Returns(this.myObject);
+            this.then = new ThenSteps(scenario);
         }
 
         [Fact]

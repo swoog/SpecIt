@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq.Expressions;
+    using System.Runtime.CompilerServices;
 
     public static class AssertExtension
     {
@@ -13,7 +14,16 @@
 
         public static IAssert<TResult> Assert<T, TResult>(this IThen then, Expression<Func<T, TResult>> func)
         {
-            var data = then.GetReturnValue<T>();
+            T data;
+            if (then.ReturnValueIs<T>())
+            {
+                data = then.GetReturnValue<T>();
+            }
+            else
+            {
+                data = then.Scenario.Resolver.Resolve<T>();
+            }
+
             var propertyName = GetPropertyName(func);
             var value = func.Compile()(data);
 

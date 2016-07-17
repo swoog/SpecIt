@@ -12,6 +12,21 @@
             return then.Scenario.Resolver.Resolve<Assert<TResult>>(new { value = value, propertyName = (string)null });
         }
 
+        public static void Assert<T>(this IThen then, Action<T> func)
+        {
+            T data;
+            if (then.ReturnValueIs<T>())
+            {
+                data = then.GetReturnValue<T>();
+            }
+            else
+            {
+                data = then.Scenario.Resolver.Resolve<T>();
+            }
+
+            func(data);
+        }
+
         public static IAssert<TResult> Assert<T, TResult>(this IThen then, Expression<Func<T, TResult>> func)
         {
             T data;

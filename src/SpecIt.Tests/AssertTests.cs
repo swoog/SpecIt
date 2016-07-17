@@ -29,9 +29,17 @@ namespace SpecIt.Tests
         }
 
         [Fact]
+        public void Should_execute_action_When_assert()
+        {
+            Check.ThatCode(() => this.then.Assert<MyObject>(v => { throw  new Exception("Error");}))
+                .Throws<Exception>()
+                .WithMessage("Error");
+        }
+
+        [Fact]
         public void Should_throw_exception_When_no_property_name()
         {
-            var assertion = AssertExtension.Assert<MyObject, int>(this.then, v => 1);
+            var assertion = this.then.Assert<MyObject, int>(v => 1);
 
             Check.ThatCode(() => assertion.IsEqualTo(2))
                 .Throws<SpecItException>()
@@ -42,7 +50,7 @@ namespace SpecIt.Tests
         public void Should_throw_exception_When_int_are_note_equal()
         {
             this.myObject.ItemsOrder = 1;
-            var assertion = AssertExtension.Assert<MyObject, int>(this.then, v => v.ItemsOrder);
+            var assertion = this.then.Assert<MyObject, int>(v => v.ItemsOrder);
 
             Check.ThatCode(() => assertion.IsEqualTo(2))
                 .Throws<SpecItException>()
@@ -53,7 +61,7 @@ namespace SpecIt.Tests
         public void Should_throw_exception_When_string_are_note_equal()
         {
             this.myObject.Name = "Aurelien";
-            var assertion = AssertExtension.Assert<MyObject, string>(this.then, v => v.Name);
+            var assertion = this.then.Assert<MyObject, string>(v => v.Name);
 
             Check.ThatCode(() => assertion.IsEqualTo("Aurélien"))
                 .Throws<SpecItException>()

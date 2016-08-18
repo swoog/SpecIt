@@ -7,29 +7,29 @@ namespace SpecIt
 
     internal class Resolver : IResolver
     {
-        private readonly Dictionary<Type, object> instances = new Dictionary<Type, object>();
+        private readonly Dictionary<TypeInfo, object> instances = new Dictionary<TypeInfo, object>();
 
         public Resolver()
         {
-            this.instances.Add(typeof(IResolver), this);
+            this.instances.Add(typeof(IResolver).GetTypeInfo(), this);
         }
 
         public T Resolve<T>()
         {
-            return (T)this.Resolve(typeof(T), null);
+            return (T)this.Resolve(typeof(T).GetTypeInfo(), null);
         }
 
         public T Resolve<T>(object constructorArguments)
         {
-            return (T)this.Resolve(typeof(T), constructorArguments);
+            return (T)this.Resolve(typeof(T).GetTypeInfo(), constructorArguments);
         }
 
         public void BindTo<T>(T obj)
         {
-            this.instances.Add(typeof(T), obj);
+            this.instances.Add(typeof(T).GetTypeInfo(), obj);
         }
 
-        private object Resolve(Type type, object constructorArguments)
+        private object Resolve(TypeInfo type, object constructorArguments)
         {
             var isCached = constructorArguments == null;
             if (this.instances.ContainsKey(type) && isCached)
@@ -37,7 +37,7 @@ namespace SpecIt
                 return this.instances[type];
             }
 
-            if (type.GetTypeInfo().IsInterface)
+            if (type.IsInterface)
             {
                 var concreteType = FindConcreteType(type);
 
@@ -49,7 +49,7 @@ namespace SpecIt
                 return this.Resolve(concreteType, null);
             }
 
-            var constructor = type.GetTypeInfo().GetConstructors().FirstOrDefault();
+            var constructor = type.DeclaredConstructors.FirstOrDefault();
 
             if (constructor == null)
             {
@@ -69,7 +69,7 @@ namespace SpecIt
                 {
                     try
                     {
-                        parameters.Add(this.Resolve(parameterInfo.ParameterType, null));
+                        parameters.Add(this.Resolve(parameterInfo.ParameterType.GetTypeInfo(), null));
                     }
                     catch (ResolverException resolverException)
                     {
@@ -84,20 +84,26 @@ namespace SpecIt
                     }
                 }
             }
-
-            var instance = constructor.Invoke(parameters.ToArray());
-
-            if (isCached)
+            try
             {
-                this.instances.Add(type, instance);
-            }
+                var instance = constructor.Invoke(parameters.ToArray());
 
-            return instance;
+                if (isCached)
+                {
+                    this.instances.Add(type, instance);
+                }
+
+                return instance;
+            }
+            catch (MemberAccessException ex)
+            {
+                throw new ResolverException($"{type.Name} has no constructor", true);
+            }
         }
 
-        private Type FindConcreteType(Type interfacType)
+        private TypeInfo FindConcreteType(TypeInfo interfacType)
         {
-            return interfacType.GetTypeInfo().Assembly.GetTypes().FirstOrDefault(t => t.GetTypeInfo().GetInterfaces().Any(i => i == interfacType));
+            return interfacType.Assembly.DefinedTypes.FirstOrDefault(t => t.ImplementedInterfaces.Any(i => i.GetTypeInfo() == interfacType));
         }
 
         private bool FindParameter(object constructorArguments, ParameterInfo parameterInfo, out object value)
@@ -108,7 +114,7 @@ namespace SpecIt
                 return false;
             }
 
-            foreach (var propertyInfo in constructorArguments.GetType().GetTypeInfo().GetProperties())
+            foreach (var propertyInfo in constructorArguments.GetType().GetTypeInfo().DeclaredProperties)
             {
                 if (CompareNames(parameterInfo, propertyInfo))
                 {

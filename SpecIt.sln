@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2E0E197E-6C99-4C97-8E18-04C8631B49AD}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SpecIt.Assert", "src\SpecIt.Assert\SpecIt.Assert.xproj", "{87CA1D92-5060-482A-BB8E-CB2A2A75C777}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pancakes", "samples\Pancakes\Pancakes.xproj", "{B5EF2878-AA6B-40BC-A0F6-56695D809B18}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SpecIt.Pattern", "src\SpecIt.Pattern\SpecIt.Pattern.xproj", "{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{B5EF2878-AA6B-40BC-A0F6-56695D809B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5EF2878-AA6B-40BC-A0F6-56695D809B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5EF2878-AA6B-40BC-A0F6-56695D809B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,5 +64,6 @@ Global
 		{855AC451-0708-4EBE-BF94-4171D235CEDD} = {91254D22-346A-4274-B864-9197141DF6DB}
 		{87CA1D92-5060-482A-BB8E-CB2A2A75C777} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
 		{B5EF2878-AA6B-40BC-A0F6-56695D809B18} = {91254D22-346A-4274-B864-9197141DF6DB}
+		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
 	EndGlobalSection
 EndGlobal

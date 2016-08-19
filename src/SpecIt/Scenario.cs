@@ -3,8 +3,14 @@
     public class Scenario
     {
         public Scenario()
+            : this(new Resolver())
         {
-            this.Resolver = new Resolver();
+            
+        }
+
+        protected Scenario(IResolver resolver)
+        {
+            this.Resolver = resolver;
             this.Resolver.BindTo<Scenario>(this);
         }
 

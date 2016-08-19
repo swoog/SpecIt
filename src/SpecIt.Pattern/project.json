@@ -2,7 +2,9 @@
   "version": "99.99.99.99",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.0",
+    "Pattern.Core": "1.0.1-beta-589",
+    "SpecIt": "1.0.1-beta-*"
   },
 
   "frameworks": {

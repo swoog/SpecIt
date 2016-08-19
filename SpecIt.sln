@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1CAB95A-A63F-4F38-A4D4-D5B22D10D813}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		Pack.ps1 = Pack.ps1
+		Versions.ps1 = Versions.ps1
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SpecIt", "src\SpecIt\SpecIt.xproj", "{DD85646B-EA83-4D32-A2DB-ACA17AFA739C}"

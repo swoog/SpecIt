@@ -11,6 +11,7 @@
         protected Scenario(IResolver resolver)
         {
             this.Resolver = resolver;
+            this.Resolver.BindTo<IResolver>(resolver);
             this.Resolver.BindTo<Scenario>(this);
         }
 

@@ -9,11 +9,6 @@ namespace SpecIt
     {
         private readonly Dictionary<TypeInfo, object> instances = new Dictionary<TypeInfo, object>();
 
-        public Resolver()
-        {
-            this.instances.Add(typeof(IResolver).GetTypeInfo(), this);
-        }
-
         public T Resolve<T>()
         {
             return (T)this.Resolve(typeof(T).GetTypeInfo(), null);

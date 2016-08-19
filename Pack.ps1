@@ -1,11 +1,10 @@
 Param(
   [string]$versionNumber
 )
-Write-Output "Pack all projects"
+Write-Output "Pack all not tests projects"
 $projects = Get-ChildItem -Path "src" -Recurse "Project.json"
-Write-Output $projects
 foreach($project in $projects){
-	if (!$project.FullName.EndsWith("Tests\\project.json"))
+	if (!$project.FullName.EndsWith("Tests\project.json"))
 	{
 		Write-Output "dotnet pack -c Release --no-build $($project.FullName) --version-suffix $versionNumber"
 		dotnet pack -c Release --no-build $($project.FullName) --version-suffix $versionNumber

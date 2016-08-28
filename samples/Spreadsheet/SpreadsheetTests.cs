@@ -55,13 +55,11 @@ namespace Spreadsheet
         }
     }
 
-
     public static class SpreadsheetGiven
     {
         public static IGivenOperator<IGiven> a_spreadsheet(this IGiven given)
         {
-            given.Set(() => new SpreadSheet());
-            return given.Next();
+            return given.Set(() => new SpreadSheet());
         }
     }
 

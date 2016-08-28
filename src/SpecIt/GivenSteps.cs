@@ -36,16 +36,16 @@ namespace SpecIt
             return this.resolver.Resolve<GivenOperator<IGiven>>(new { Given = this });
         }
 
-        public IGiven Set<T>(Action<T> func)
+        public IGivenOperator<IGiven> Set<T>(Action<T> func)
         {
             func(this.resolver.Resolve<T>());
-            return this;
+            return this.Next();
         }
 
-        public IGiven Set<T>(Func<T> func)
+        public IGivenOperator<IGiven> Set<T>(Func<T> func)
         {
             this.resolver.BindTo(func());
-            return this;
+            return this.Next();
         }
     }
 }

@@ -8,8 +8,8 @@
 
         IGivenOperator<IGiven> Next();
 
-        IGiven Set<T>(Action<T> func);
+        IGivenOperator<IGiven> Set<T>(Action<T> func);
 
-        IGiven Set<T>(Func<T> func);
+        IGivenOperator<IGiven> Set<T>(Func<T> func);
     }
 }

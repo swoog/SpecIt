@@ -16,7 +16,7 @@ namespace Pancakes.Steps
 
         public static IGivenOperator<IGiven> the_ingredient(this IGiven given, string ingredient)
         {
-            return given.Set<IngredientsContext>(m => m.Ingredients.Add(ingredient)).Next();
+            return given.Set<IngredientsContext>(m => m.Ingredients.Add(ingredient));
         }
 
         public static IGivenOperator<IGiven> some_milk(this IGiven given)

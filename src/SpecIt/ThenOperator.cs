@@ -1,17 +1,18 @@
 namespace SpecIt
 {
-    public class ThenOperator : IThenOperator
+    public class ThenOperator<T> : IThenOperator<T>
+        where T : IThen
     {
-        private readonly ThenSteps thenSteps;
+        private readonly T then;
 
-        public ThenOperator(ThenSteps thenSteps)
+        public ThenOperator(T then)
         {
-            this.thenSteps = thenSteps;
+            this.then = then;
         }
 
-        public IThen And()
+        public T And()
         {
-            return this.thenSteps;
+            return this.then;
         }
     }
 }

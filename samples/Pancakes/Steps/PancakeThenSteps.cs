@@ -8,7 +8,7 @@
 
     public static class PancakeThenSteps
     {
-        public static IThenOperator the_resulting_meal_is_a_pan_cake(this IThen then)
+        public static IThenOperator<IThen> the_resulting_meal_is_a_pan_cake(this IThen then)
         {
             return then.Assert<string>().IsEqualTo("pancake");
         }

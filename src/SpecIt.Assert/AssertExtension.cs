@@ -9,10 +9,17 @@
         public static IAssert<TResult> Assert<TResult>(this IThen then)
         {
             var value = then.GetReturnValue<TResult>();
-            return then.Scenario.Resolver.Resolve<Assert<TResult>>(new { value = value, propertyName = (string)null });
+            return
+                then.Scenario.Resolver.Resolve<Assert<TResult>>(
+                    new
+                    {
+                        value = value,
+                        propertyName = (string)null,
+                        then = then
+                    });
         }
 
-        public static IThenOperator Assert<T>(this IThen then, Action<T> func)
+        public static IThenOperator<IThen> Assert<T>(this IThen then, Action<T> func)
         {
             T data;
             if (then.ReturnValueIs<T>())
@@ -26,7 +33,7 @@
 
             func(data);
 
-            return then.Scenario.Resolver.Resolve<IThenOperator>();
+            return then.Next();
         }
 
         public static IAssert<TResult> Assert<T, TResult>(this IThen then, Expression<Func<T, TResult>> func)
@@ -44,7 +51,12 @@
             var propertyName = GetPropertyName(func);
             var value = func.Compile()(data);
 
-            return then.Scenario.Resolver.Resolve<Assert<TResult>>(new { value = value, propertyName = propertyName });
+            return then.Scenario.Resolver.Resolve<Assert<TResult>>(new
+            {
+                value = value,
+                propertyName = propertyName,
+                then = then
+            });
         }
 
         private static string GetPropertyName<T, TResult>(Expression<Func<T, TResult>> func)

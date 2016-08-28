@@ -1,7 +1,13 @@
 namespace SpecIt
 {
-    public interface IThenOperator
+    public interface IThenOperator<out T>
+        where T : IThen
     {
-        IThen And();
+        T And();
     }
+
+
+    //public interface IThenOperator : IThenOperator<IThen>
+    //{
+    //}
 }

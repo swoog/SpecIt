@@ -96,9 +96,17 @@ namespace SpecIt
             }
         }
 
-        private TypeInfo FindConcreteType(TypeInfo interfacType)
+        private TypeInfo FindConcreteType(TypeInfo interfaceType)
         {
-            return interfacType.Assembly.DefinedTypes.FirstOrDefault(t => t.ImplementedInterfaces.Any(i => i.GetTypeInfo() == interfacType));
+            if (interfaceType.IsGenericType)
+            {
+                interfaceType = interfaceType.GetGenericTypeDefinition().GetTypeInfo();
+            }
+
+            return
+                interfaceType.Assembly.DefinedTypes.FirstOrDefault(
+                    t => t.ImplementedInterfaces.Any(
+                        i => i.GetTypeInfo().Name == interfaceType.Name));
         }
 
         private bool FindParameter(object constructorArguments, ParameterInfo parameterInfo, out object value)

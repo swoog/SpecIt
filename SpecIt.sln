@@ -26,6 +26,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pancakes", "samples\Pancake
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SpecIt.Pattern", "src\SpecIt.Pattern\SpecIt.Pattern.xproj", "{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Spreadsheet", "samples\Spreadsheet\Spreadsheet.xproj", "{874051B3-2EFC-4BC3-97D9-16FF2DAA8C9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874051B3-2EFC-4BC3-97D9-16FF2DAA8C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874051B3-2EFC-4BC3-97D9-16FF2DAA8C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874051B3-2EFC-4BC3-97D9-16FF2DAA8C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874051B3-2EFC-4BC3-97D9-16FF2DAA8C9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{87CA1D92-5060-482A-BB8E-CB2A2A75C777} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
 		{B5EF2878-AA6B-40BC-A0F6-56695D809B18} = {91254D22-346A-4274-B864-9197141DF6DB}
 		{A9F159DA-AAED-4BF0-B559-C2DA184ADFE8} = {2E0E197E-6C99-4C97-8E18-04C8631B49AD}
+		{874051B3-2EFC-4BC3-97D9-16FF2DAA8C9D} = {91254D22-346A-4274-B864-9197141DF6DB}
 	EndGlobalSection
 EndGlobal

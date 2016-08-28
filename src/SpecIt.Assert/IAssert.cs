@@ -4,14 +4,16 @@ namespace SpecIt.Assert
 
     public interface IAssert<T>
     {
-        IThenOperator Is(Func<T, bool> predicate);
+        IThenOperator<IThen> Is(Func<T, bool> predicate);
 
-        IThenOperator IsEqualTo(T expected);
+        IThenOperator<IThen> IsEqualTo(T expected);
 
-        IThenOperator StartsWith(string message);
+        IThenOperator<IThen> StartsWith(string message);
 
-        IThenOperator IsNotEqualTo(T expected);
+        IThenOperator<IThen> IsNotEqualTo(T expected);
 
-        IThenOperator NotStartsWith(string message);
+        IThenOperator<IThen> NotStartsWith(string message);
+
+        IThenOperator<TThenStep> HasSingle<TChild, TThenStep>() where TThenStep : IThen;
     }
 }

@@ -1,6 +1,9 @@
 namespace SpecIt.Assert
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using Humanizer;
 
@@ -10,37 +13,48 @@ namespace SpecIt.Assert
 
         private readonly string propertyName;
 
-        private readonly IThenOperator thenOperator;
+        private readonly IThen then;
 
-        public Assert(T value, string propertyName, IThenOperator thenOperator)
+        public Assert(T value, string propertyName, IThen then)
         {
             this.value = value;
             this.propertyName = propertyName;
-            this.thenOperator = thenOperator;
+            this.then = then;
         }
-        public IThenOperator Is(Func<T, bool> predicate)
+        public IThenOperator<IThen> Is(Func<T, bool> predicate)
         {
             return this.Is(predicate, string.Empty);
         }
 
-        private IThenOperator Is(Func<T, bool> predicate, string message)
+        private IThenOperator<IThen> Is(Func<T, bool> predicate, string message)
         {
             if (!predicate(this.value))
             {
                 throw new SpecItException(message + $" but was {this.GetValue()}");
             }
 
-            return this.thenOperator;
+            return this.then.Next();
         }
 
-        private IThenOperator IsNot(Func<T, bool> predicate, string message)
+        private IThenOperator<TThen> Is<TThen>(Func<T, bool> predicate, string message)
+            where TThen : IThen
+        {
+            if (!predicate(this.value))
+            {
+                throw new SpecItException(message + $" but was {this.GetValue()}");
+            }
+
+            return this.then.Next<TThen>();
+        }
+
+        private IThenOperator<IThen> IsNot(Func<T, bool> predicate, string message)
         {
             if (predicate(this.value))
             {
                 throw new SpecItException(message + $" but was {this.GetValue()}");
             }
 
-            return this.thenOperator;
+            return this.then.Next();
         }
 
         private string GetValue()
@@ -48,7 +62,7 @@ namespace SpecIt.Assert
             return this.FormatToString(this.value);
         }
 
-        public IThenOperator IsEqualTo(T expected)
+        public IThenOperator<IThen> IsEqualTo(T expected)
         {
             string typeName = Humanize();
 
@@ -88,7 +102,7 @@ namespace SpecIt.Assert
             return typeof(T).Name.Transform(To.LowerCase);
         }
 
-        public IThenOperator StartsWith(string message)
+        public IThenOperator<IThen> StartsWith(string message)
         {
             return this.Is(
                 v =>
@@ -102,21 +116,35 @@ namespace SpecIt.Assert
                     });
         }
 
-        public IThenOperator NotStartsWith(string message)
+        public IThenOperator<IThen> NotStartsWith(string message)
         {
             return this.Is(
                 v =>
-                {
-                    if (!(v is string))
                     {
-                        return true;
-                    }
+                        if (!(v is string))
+                        {
+                            return true;
+                        }
 
-                    return !(v as string).StartsWith(message);
-                });
+                        return !(v as string).StartsWith(message);
+                    });
         }
 
-        public IThenOperator IsNotEqualTo(T expected)
+        public IThenOperator<TThenStep> HasSingle<TChild, TThenStep>() where TThenStep : IThen
+        {
+            return this.Is<TThenStep>(
+                v =>
+                    {
+                        if (!(v is IEnumerable<TChild>))
+                        {
+                            return true;
+                        }
+
+                        return (v as IEnumerable<TChild>).Count() != 1;
+                    }, string.Empty);
+        }
+
+        public IThenOperator<IThen> IsNotEqualTo(T expected)
         {
             string typeName = Humanize();
 

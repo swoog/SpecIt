@@ -41,5 +41,11 @@ namespace SpecIt
             func(this.resolver.Resolve<T>());
             return this;
         }
+
+        public IGiven Set<T>(Func<T> func)
+        {
+            this.resolver.BindTo(func());
+            return this;
+        }
     }
 }

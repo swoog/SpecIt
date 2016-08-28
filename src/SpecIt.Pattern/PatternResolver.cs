@@ -22,5 +22,10 @@
         {
             this.kernel.Bind(typeof(T), new LambdaFactory(() => obj));
         }
+
+        public void ReBindTo<T>(T obj)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

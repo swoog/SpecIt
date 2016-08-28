@@ -73,7 +73,7 @@ namespace SpecIt.Assert
                 exceptionName = $"{name} expected the {typeName} value {GetExpected(expected)}";
             }
 
-            return this.Is(v => v.Equals(expected), exceptionName);
+            return this.Is(v => object.Equals(v, expected), exceptionName);
         }
 
         private string GetExpected(T expected)
@@ -137,11 +137,39 @@ namespace SpecIt.Assert
                     {
                         if (!(v is IEnumerable<TChild>))
                         {
-                            return true;
+                            return false;
                         }
 
-                        return (v as IEnumerable<TChild>).Count() != 1;
+                        var countChild = (v as IEnumerable<TChild>).Count() == 1;
+
+                        if (countChild)
+                        {
+                            this.then.Scenario.Resolver.ReBindTo<TChild>((v as IEnumerable<TChild>).Single());
+                        }
+
+                        return countChild;
                     }, string.Empty);
+        }
+
+        public IThenOperator<TThenStep> Has<TChild, TThenStep>(int numberElement) where TThenStep : IThen
+        {
+            return this.Is<TThenStep>(
+                v =>
+                {
+                    if (!(v is IEnumerable<TChild>))
+                    {
+                        return false;
+                    }
+
+                    var countChild = (v as IEnumerable<TChild>).Any();
+
+                    if (countChild)
+                    {
+                        this.then.Scenario.Resolver.ReBindTo<TChild>((v as IEnumerable<TChild>).ElementAt(numberElement - 1));
+                    }
+
+                    return countChild;
+                }, string.Empty);
         }
 
         public IThenOperator<IThen> IsNotEqualTo(T expected)

@@ -7,5 +7,7 @@
         T Resolve<T>(object constructorArguments);
 
         void BindTo<T>(T obj);
+
+        void ReBindTo<T>(T obj);
     }
 }

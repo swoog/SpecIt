@@ -24,6 +24,16 @@ namespace SpecIt
             this.instances.Add(typeof(T).GetTypeInfo(), obj);
         }
 
+        public void ReBindTo<T>(T obj)
+        {
+            if (this.instances.ContainsKey(typeof(T).GetTypeInfo()))
+            {
+                this.instances.Remove(typeof(T).GetTypeInfo());
+            }
+
+            this.BindTo(obj);
+        }
+
         private object Resolve(TypeInfo type, object constructorArguments)
         {
             var isCached = constructorArguments == null;

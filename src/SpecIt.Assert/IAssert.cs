@@ -15,5 +15,7 @@ namespace SpecIt.Assert
         IThenOperator<IThen> NotStartsWith(string message);
 
         IThenOperator<TThenStep> HasSingle<TChild, TThenStep>() where TThenStep : IThen;
+
+        IThenOperator<TThenStep> Has<TChild, TThenStep>(int numberElement) where TThenStep : IThen;
     }
 }
